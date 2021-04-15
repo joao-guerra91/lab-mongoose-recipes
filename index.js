@@ -21,7 +21,38 @@ mongoose
   })
   .then(() => {
     // Run your code here, after you have insured that the connection was made
+    Recipe.create({
+      title: 'Ovos Mexidos',
+      level: 'Easy Peasy',
+      ingridients: ['ovos', 'sal'],
+      cuisine: 'Planet earth',
+      dishType: 'breakfast',
+      image: 'https://images.media-allrecipes.com/images/75131.jpg',
+      durration: 5,
+    }).then(() => {
+      console.log('Recipe created')
+      
+      Recipe.insertMany(data).then(() => {
+        
+            Recipe.findOneAndUpdate({ title: "Rigatoni alla Genovese"}, {duration: 100})
+            .then(() => {
+              console.log('recipe updated');
+        
+              Recipe.deleteOne({ title: 'Carrot Cake'})
+              .then(() => {
+              console.log('Recipe Deleted');
+              mongoose.connection.close();
+            })
+        })
+    })
+
+  })
+
   })
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
+
+
+
+
